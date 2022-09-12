@@ -7,7 +7,9 @@ import 'package:firebase_crudapp/models/product.dart';
 class ProductScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    final products = Provider.of<List<Product>>(context);
+    final products = Provider.of<Product>(context, listen: false);
+    //final products = Provider.of<Product>(context, listen: false);
+    // final products = Provider.of<Product>(context, listen: false);
 
     return Scaffold(
       appBar: AppBar(
@@ -36,20 +38,23 @@ class ProductScreen extends StatelessWidget {
               })
         ],
       ),
-      body: (products != null)
-          ? ListView.builder(
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(products[index].name!),
-                  trailing: Text(products[index].price.toString()),
-                  onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (context) => AddEditProduct(products[index])));
-                  },
-                );
-              })
-          : Center(child: CircularProgressIndicator()),
+      body: Container(
+        child: Text('data'),
+      ),
+      // body: (products != null)
+      //     ? ListView.builder(
+      //         itemCount: products.length,
+      //         itemBuilder: (context, index) {
+      //           return ListTile(
+      //             title: Text(products[index].name!),
+      //             trailing: Text(products[index].price.toString()),
+      //             onTap: () {
+      //               Navigator.of(context).push(MaterialPageRoute(
+      //                   builder: (context) => AddEditProduct(products[index])));
+      //             },
+      //           );
+      //         })
+      //     : Center(child: CircularProgressIndicator()),
     );
   }
 }

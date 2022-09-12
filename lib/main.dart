@@ -1,3 +1,4 @@
+import 'package:firebase_crudapp/models/product.dart';
 import 'package:firebase_crudapp/providers/product_provider.dart';
 import 'package:firebase_crudapp/screens/product_screen.dart';
 import 'package:firebase_crudapp/services/firestore_service.dart';
@@ -14,8 +15,10 @@ void main() async {
 
   // initial firebaseMessenger
   // PushNotificationManager().initFirebaseMessaging();
-
-  runApp(MyApp());
+  builder:
+  (context, child) {
+    runApp(MyApp());
+  };
 }
 
 class MyApp extends StatelessWidget {
@@ -25,10 +28,11 @@ class MyApp extends StatelessWidget {
 
     return MultiProvider(
       providers: [
+        //Provider(create: (context) => ProductProvider()),
         ChangeNotifierProvider(create: (context) => ProductProvider()),
         StreamProvider(
           create: (context) => fireStoreService.getProducts(),
-          initialData: [],
+          initialData: ProductProvider(),
         ),
       ],
       child: MaterialApp(
